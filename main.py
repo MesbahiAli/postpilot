@@ -1,4 +1,4 @@
-from scrapers.reddit_scraper import get_trending_posts
+from scrapers.reddit_scraper import postFinal
 from generator.post_generator import generate_linkedin_post
 import json
 import os
@@ -29,7 +29,10 @@ def save_post(post, generated_content):
 
 def run_agent():
     print("\n🤖 PostPilot Agent Starting...\n")
-    posts = get_trending_posts(limit=5)
+    posts = postFinal
+    if not posts:
+        print("⚠️  No relevant posts found today. Try again later.")
+        return
 
     for post in posts:
         print(f"\n📰 SOURCE: {post['title']}")
